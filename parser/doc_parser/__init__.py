@@ -1,8 +1,12 @@
 import asyncio
 import re
 
-from .file_parsers import *
-from .abc import AbstractDocument
+if __name__ == '__main__':
+    from file_parsers import ExcelDocument, WordDocument
+    from file_parsers.abc import AbstractDocument
+else:
+    from .file_parsers import ExcelDocument, WordDocument
+    from .file_parsers.abc import AbstractDocument
 from exceptions.parser_exceptions import WrongDocumentTypeException, NotFileLinkException
 from aiohttp import ClientSession
 
@@ -40,3 +44,7 @@ class DocumentParser:
             async with session.get(self.__link) as resp:
                 if resp.status == 200:
                     return await resp.read()
+
+
+if __name__ == '__main__':
+    asyncio.run(DocumentParser('https://permaviat.ru/_res/fs/2452file.docx').find_changes())

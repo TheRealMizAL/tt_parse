@@ -4,6 +4,7 @@ from aiohttp import ClientSession
 from bs4 import BeautifulSoup
 from exceptions.parser_exceptions import ResponseCodeException
 
+
 class SiteParser:
 
     def __init__(self, url):

@@ -1,4 +1,4 @@
-from ..abc import AbstractDocument
+from .abc import AbstractDocument
 import pandas as pd
 
 

@@ -5,7 +5,7 @@ import pytest
 
 @pytest.mark.asyncio
 async def test_docx():
-    result = await DocumentParser('https://permaviat.ru/_res/fs/2457file.docx').find_changes()
+    result = await DocumentParser('https://permaviat.ru/_res/fs/2452file.docx').find_changes()
     assert result == 'word parser'
 
 
@@ -31,6 +31,7 @@ async def test_wrong_value():
 async def test_none_value():
     with pytest.raises(NotFileLinkException):
         await DocumentParser(None).find_changes()
+
 
 @pytest.mark.asyncio
 async def test_wrong_link():

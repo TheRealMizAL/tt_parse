@@ -2,7 +2,7 @@ import asyncio
 
 from aiohttp import ClientSession
 from bs4 import BeautifulSoup
-
+from exceptions.parser_exceptions import ResponseCodeException
 
 class SiteParser:
 
@@ -16,7 +16,7 @@ class SiteParser:
                 if response.status == 200:
                     return await response.text()
                 else:
-                    pass  # todo: add BadResponseException
+                    raise ResponseCodeException(f'Response not 200 ({response.status})')
 
     async def last_file(self) -> str:
 

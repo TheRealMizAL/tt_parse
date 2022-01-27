@@ -7,3 +7,7 @@ class WrongDocumentTypeException(BaseParserException):
 
 class NotFileLinkException(BaseParserException):
     pass
+
+
+class ResponseCodeException(BaseParserException):
+    pass

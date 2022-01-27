@@ -2,6 +2,7 @@ from aiohttp import ClientSession
 from hashlib import md5
 import asyncio
 from bs4 import BeautifulSoup
+from doc_parser import DocumentParser
 
 
 class SiteParser:
@@ -37,7 +38,9 @@ class SiteParser:
         soup = BeautifulSoup(text, 'lxml')
         first_doc_raw = soup.find('div', {'class': 'file_link'})
         first_doc_url = '/'.join(self.url.split('/')[:3]) + first_doc_raw.find('a')['href']
+
         print(first_doc_url)
+        await DocumentParser(first_doc_url).find_changes()
 
 
 if __name__ == '__main__':  # for debug only!!!

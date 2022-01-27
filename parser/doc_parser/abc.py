@@ -6,5 +6,5 @@ class AbstractDocument(ABC):
     Base class for all types of documents
     """
     @abstractmethod
-    async def parse(self):
+    async def parse(self, file_bytes: bytes):
         pass

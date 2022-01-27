@@ -12,7 +12,7 @@ async def test_docx():
 @pytest.mark.asyncio
 async def test_xls():
     result = await DocumentParser('https://permaviat.ru/_res/fs/2457file.xls').find_changes()
-    assert result == 'excel parser'
+    assert result == {'group_name': 'ТО-21-1', 'changelist': [{'number': 1, 'lesson_name': 'История ДИСТ ', 'teacher_name': 'Пастушкова О.В.'}, {'number': 2, 'lesson_name': 'Математика ДСИТ ', 'teacher_name': 'Мершина Т.Г.'}, {'number': 3, 'lesson_name': 'Математика ДИСТ ', 'teacher_name': 'Мершина Т.Г.'}]}
 
 
 @pytest.mark.asyncio

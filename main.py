@@ -1,3 +1,4 @@
 from vk_group_bot import bot
 
-bot.run_forever()
+if __name__ == '__main__':
+    bot.run_forever()

@@ -7,7 +7,7 @@ if __name__ == '__main__':
 else:
     from .file_parsers import ExcelDocument, WordDocument
     from .file_parsers.abc import AbstractDocument
-from exceptions.parser_exceptions import WrongDocumentTypeException, NotFileLinkException
+from pr_exceptions.parser_exceptions import WrongDocumentTypeException, NotFileLinkException
 from aiohttp import ClientSession
 
 __all__ = "DocumentParser"

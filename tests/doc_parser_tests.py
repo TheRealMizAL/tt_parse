@@ -1,5 +1,5 @@
 from parser.doc_parser import DocumentParser
-from exceptions.parser_exceptions import WrongDocumentTypeException, NotFileLinkException
+from pr_exceptions.parser_exceptions import WrongDocumentTypeException, NotFileLinkException
 import pytest
 
 

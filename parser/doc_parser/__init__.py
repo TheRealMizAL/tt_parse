@@ -25,14 +25,13 @@ class DocumentParser:
         except AttributeError:
             raise NotFileLinkException(f'{self.__link} is not file link or has wrong type')
 
-        match self.__doc_type:
-            case 'xls':
-                self.__document = ExcelDocument()
-            case 'docx':
-                self.__document = WordDocument()
-            case _:
-                raise WrongDocumentTypeException(
-                    f'Passed document should be "docx" type or "xls", not {self.__doc_type}')
+        if self.__doc_type == 'xls':
+            self.__document = ExcelDocument()
+        elif self.__doc_type == 'docx':
+            self.__document = WordDocument()
+        else:
+            raise WrongDocumentTypeException(
+                f'Passed document should be "docx" type or "xls", not {self.__doc_type}')
 
     async def find_changes(self):
         await asyncio.sleep(0.5)

@@ -18,7 +18,7 @@ class WordDocument(AbstractDocument):
         except FileExistsError:
             pass
 
-    async def parse(self, file_bytes):
+    async def parse(self, file_bytes) -> dict:
 
         docx_file = docx.Document(BytesIO(file_bytes))
         await self.__tables_parse(docx_file.tables)

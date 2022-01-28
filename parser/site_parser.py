@@ -19,7 +19,7 @@ class SiteParser:
                 else:
                     raise ResponseCodeException(f'Response not 200 ({response.status})')
 
-    async def last_file(self) -> str:
+    async def last_file_link(self) -> str:
 
         soup = BeautifulSoup(await self.__get_site, 'lxml')
         first_doc_raw = soup.find('div', {'class': 'file_link'})
@@ -28,6 +28,11 @@ class SiteParser:
         await asyncio.sleep(0.1)  # idk why, but without this pause code crashes
         return first_doc_url
 
+    async def last_file_name(self) -> str:
+        soup = BeautifulSoup(await self.__get_site, 'lxml')
+        first_doc_raw = soup.find('div', {'class': 'file_link'}).find('a').get_text()
 
-if __name__ == '__main__':
-    print(asyncio.run(SiteParser('https://permaviat.ru/raspisanie-zamen/').last_file()))
+        return first_doc_raw
+
+
+

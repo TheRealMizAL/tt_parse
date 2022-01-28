@@ -6,7 +6,7 @@ import pytest
 @pytest.mark.asyncio
 async def test_docx():
     result = await DocumentParser('https://permaviat.ru/_res/fs/2452file.docx').find_changes()
-    assert result == 'word parser'
+    assert len(result['changelist']) == 0 and len(result['images']) == 4
 
 
 @pytest.mark.asyncio

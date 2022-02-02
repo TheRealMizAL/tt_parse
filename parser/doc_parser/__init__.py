@@ -46,4 +46,4 @@ class DocumentParser:
 
 
 if __name__ == '__main__':
-    asyncio.run(DocumentParser('https://permaviat.ru/_res/fs/2452file.docx').find_changes())
+    asyncio.run(DocumentParser('https://permaviat.ru/_res/fs/2463file.xls').find_changes())

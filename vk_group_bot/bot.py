@@ -2,7 +2,7 @@ from vkbottle.bot import Bot, Message
 from vkbottle.tools import PhotoMessageUploader
 from vkbottle import Keyboard, KeyboardButtonColor, Text
 from parser import SiteParser, DocumentParser
-
+from pr_exceptions.abc_exceptions import BaseParserException
 START_KEYBOARD = (Keyboard(inline=True)
                   .add(Text('Узнать изменения'), color=KeyboardButtonColor.POSITIVE)).get_json()
 
@@ -17,11 +17,13 @@ async def start_handler(msg: Message):
 
 @bot.on.message(lev=['Узнать изменения', 'Изменения'])
 async def get_changes(msg: Message):
-    sp = SiteParser('https://permaviat.ru/raspisanie-zamen/')
-    last_file = await sp.last_file_link()
-    filename = await sp.last_file_name()
-    changes = await DocumentParser(last_file).find_changes()
-
+    try:
+        sp = SiteParser('https://permaviat.ru/raspisanie-zamen/')
+        last_file = await sp.last_file_link()
+        filename = await sp.last_file_name()
+        changes = await DocumentParser(last_file).find_changes()
+    except BaseParserException as ex:
+        return await msg.answer(f'Oops... Something wrong there. Description: {ex.args[0]}')
     text_response = f'{filename}:\n'
     if changes['changelist']:
         for change in changes['changelist']:

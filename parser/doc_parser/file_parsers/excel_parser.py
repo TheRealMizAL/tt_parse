@@ -1,3 +1,5 @@
+import re
+
 from .abc import AbstractDocument
 import pandas as pd
 
@@ -6,7 +8,7 @@ class ExcelDocument(AbstractDocument):
 
     async def parse(self, file_bytes):
         excel_file = pd.read_excel(file_bytes, skiprows=6, nrows=10)  # useful info starts from 6th row
-
+        print(excel_file)
         lessons = excel_file['ТО-21-1']
         changes = {'group_name': 'ТО-21-1',
                    'changelist': []}
@@ -16,6 +18,8 @@ class ExcelDocument(AbstractDocument):
 
             if isinstance(lesson_name, float):
                 continue
+            elif re.match('^[А-ЯA-Z]+-[0-9]+-[0-9]+$', lesson_name):
+                break
             changes['changelist'].append({'number': string_index//2 + 1,
                                           'lesson_name': lesson_name,
                                           'teacher_name': teacher_name})

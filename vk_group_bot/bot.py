@@ -23,7 +23,8 @@ async def get_changes(msg: Message):
         filename = await sp.last_file_name()
         changes = await DocumentParser(last_file).find_changes()
     except BaseParserException as ex:
-        return await msg.answer(f'Oops... Something wrong there. Description: {ex.args[0]}')
+        args = '\n'.join(ex.args)
+        return await msg.answer(f'Oops... Something wrong there. Description:\n{args}')
     text_response = f'{filename}:\n'
     if changes['changelist']:
         for change in changes['changelist']:
